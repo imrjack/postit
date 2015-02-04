@@ -50,6 +50,7 @@ GEM
     coffee-script-source (1.9.0)
     erubis (2.7.0)
     execjs (2.3.0)
+    execjs (2.2.2)
     globalid (0.3.0)
       activesupport (>= 4.1.0)
     hike (1.2.3)
