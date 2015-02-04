@@ -1,0 +1,23 @@
+<h1><%= @post.title %></h1>
+Post by <%= @post.creator.username %>
+
+<table>
+	<tr>
+	<th>Description</th>
+	<th></th>
+	</tr>
+
+
+	<tr>
+		<td><%= @post.description %></td>
+	</tr>
+
+</table>
+
+<table>
+<th> Comments </th>
+<tr></tr>
+	<% @post.comments.each do |c|%>
+		<td><%= c.body %> by <% c.creator %> </td>
+		<% end %>
+</table>
