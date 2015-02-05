@@ -1,23 +1,26 @@
-<h1><%= @post.title %></h1>
-Post by <%= @post.creator.username %>
 
-<table>
-	<tr>
-	<th>Description</th>
-	<th></th>
-	</tr>
+<%=render 'shared/content_title', title: @post.title %>
+<p><%=render @post.categories %>
+</p>
 
 
-	<tr>
-		<td><%= @post.description %></td>
-	</tr>
+<div class = 'well'>
+	<%=@post.description %>
+	<small>
+		<p>
+		<span class= 'quiet'> By <%= @post.creator.username %> </span>
+		</p>
+	</small>
+</div>
+<div class = 'well'>
+	<%@post.comments.each_with_index do |comment,i| %>
+		<p>
+		<%=render 'shared/creator', name: comment.creator.username, time: comment.created_at %>
+		</p>
+	<div class='well well-sm'>
+		<%= comment.body %>
 
-</table>
+	</div>
+	<%end%>
+</div>
 
-<table>
-<th> Comments </th>
-<tr></tr>
-	<% @post.comments.each do |c|%>
-		<td><%= c.body %> by <% c.creator %> </td>
-		<% end %>
-</table>
