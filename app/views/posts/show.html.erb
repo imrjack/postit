@@ -1,26 +1,38 @@
+<p class='pull-right'> [<%= link_to 'edit this post', edit_post_path(@post) %>]
 
-<%=render 'shared/content_title', title: @post.title %>
-<p><%=render @post.categories %>
+<p>
+  <%= render @post.categories%>
+</p>
+
+<p>
+  <%= render 'shared/content_title', title: @post.title%>
 </p>
 
 
-<div class = 'well'>
-	<%=@post.description %>
-	<small>
-		<p>
-		<span class= 'quiet'> By <%= @post.creator.username %> </span>
-		</p>
-	</small>
-</div>
-<div class = 'well'>
-	<%@post.comments.each_with_index do |comment,i| %>
-		<p>
-		<%=render 'shared/creator', name: comment.creator.username, time: comment.created_at %>
-		</p>
-	<div class='well well-sm'>
-		<%= comment.body %>
+<div class ='row'>
+  <div class='span8 well'>
 
-	</div>
-	<%end%>
+    <p> 
+      <%= @post.description%> 
+    </p>
+
+    <p>
+      <%= render '/shared/creator', name: @post.creator.username, time: @post.created_at %>
+    </p>
+
+  </div>
 </div>
 
+
+<!-- 
+<p><h4>Comments</h4></p>
+<hr>
+<% @post.comments.each do |comment| %>
+<div class='span8 well'>
+<p>
+<%= comment.body %>
+</p>
+<%= render 'shared/creator', name: comment.creator.username, time: comment.created_at %>
+</div>
+<% end %>
+ -->
