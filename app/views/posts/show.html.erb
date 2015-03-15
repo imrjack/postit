@@ -17,22 +17,26 @@
     </p>
 
     <p>
-      <%= render '/shared/creator', name: @post.creator.username, time: @post.created_at %>
+      <%= render '/shared/creator', name: @post.creator.username, time: display_datetime(@post.created_at) %>
     </p>
 
   </div>
 </div>
 
-
-<!-- 
-<p><h4>Comments</h4></p>
-<hr>
-<% @post.comments.each do |comment| %>
-<div class='span8 well'>
-<p>
-<%= comment.body %>
-</p>
-<%= render 'shared/creator', name: comment.creator.username, time: comment.created_at %>
-</div>
+<%= render 'shared/errors', obj:@comment %>
+<%= form_for [@post, @comment] do |f| %>
+  <div class='control-group'>
+    <%= f.text_area :body, rows:5 %>  
+  </div>
+    <%= f.submit 'comment' %>
 <% end %>
- -->
+
+
+  <% @post.comments.each do |comment| %>
+
+<div class = 'well'>
+    <ul> <%= comment.body %> </ul>
+</div>
+  <% end %>
+
+

@@ -1,23 +1,24 @@
-class CommentsController < ApplicationController
+  class CommentsController < ApplicationController
 
-  def index
+  def create
+    @post= Post.find(params[:post_id])
+    @comment = @post.comments.build(params.require(:comment).permit(:body))
+    @comment.creator= User.first
+    binding.pry
 
-  end
-
-  def show
-
-  end
-
-  def new
-  
+    if @comment.save
+      redirect_to post_path(@post)
+    else
+      render 'posts/show'
+    end
   end
 
   def edit
-  
+    
   end
 
   def update
-  
+  binding.pry
   end
 
 

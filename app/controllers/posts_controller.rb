@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   end
 
   def show
-  	
+    @comment = Comment.new
   end
 
   def new
@@ -17,9 +17,9 @@ class PostsController < ApplicationController
   def create
     @post= Post.new(post_params)
     @post.creator = User.first
-    
+
     if @post.save
-      flash[:notice]= "saved"
+      flash["Success"]= "Saved"
       redirect_to posts_path
     else
       render :new
@@ -33,7 +33,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      flash[:notice]= "Post has been edited"
+      flash["success"]= "Post has been edited"
       redirect_to post_path(@post)
     else
       render :edit
@@ -47,7 +47,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :url, :creator, :description)
+    params.require(:post).permit(:title, :url, :creator, :description, :category_ids =>[])
   end
 
 end

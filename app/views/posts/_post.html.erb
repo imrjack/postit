@@ -3,9 +3,9 @@
 
   <%= render post.categories%>
 
-    <h4><%= link_to post.title, post_path(post) %> </h4>
+    <h4><%= link_to post.title, fix_url(post.url) %> </h4>
     <p><%= post.description %></p>
-    <p><%= render 'shared/creator', name: post.creator.username, time: post.created_at %></p>
+    <p><%= render 'shared/creator', name: post.creator.username, time: display_datetime(post.created_at) %></p>
 
     <small>
     <span>
