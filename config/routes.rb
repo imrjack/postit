@@ -1,8 +1,11 @@
 PostitTemplate::Application.routes.draw do
   root to: 'posts#index'
 
-  get '/new' => 'users#new'
-  post '/register' => 'users#create'
+  get 'register' => 'users#new' 
+  get 'login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  delete 'logout' => 'sesssions#destroy'
+
 
   resources :posts, except: [:destroy] do 
     resources :comments, only:[:create]
@@ -10,8 +13,7 @@ PostitTemplate::Application.routes.draw do
 
   resources :categories, only: [:show, :new, :create]
     
-
-
+  resources :users, only:[:create, :edit, :update, :destroy]
 end 
 
 
