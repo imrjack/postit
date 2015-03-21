@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   
-  before_filter :set_post, only:[:show, :edit, :update]
-  
+  before_action :set_post, only:[:show, :edit, :update]
+  before_action :require_user, except:[:index,:show]
   def index
   	@posts = Post.all
   end
@@ -16,7 +16,8 @@ class PostsController < ApplicationController
 
   def create
     @post= Post.new(post_params)
-    @post.creator = User.first
+    binding.pry
+    @post.creator = current_user
 
     if @post.save
       flash["Success"]= "Saved"

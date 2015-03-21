@@ -4,7 +4,7 @@ PostitTemplate::Application.routes.draw do
   get 'register' => 'users#new' 
   get 'login' => 'sessions#new'
   post '/login' => 'sessions#create'
-  delete 'logout' => 'sesssions#destroy'
+  delete '/logout' => 'sessions#destroy'
 
 
   resources :posts, except: [:destroy] do 

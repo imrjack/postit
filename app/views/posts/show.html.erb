@@ -1,6 +1,8 @@
+<% if @post.creator.username == current_user %>
 <p class='pull-right'> [<%= link_to 'edit this post', edit_post_path(@post) %>]
 
 <p>
+<% end %>
   <%= render @post.categories%>
 </p>
 
@@ -24,19 +26,18 @@
 </div>
 
 <%= render 'shared/errors', obj:@comment %>
-<%= form_for [@post, @comment] do |f| %>
-  <div class='control-group'>
-    <%= f.text_area :body, rows:5 %>  
-  </div>
-    <%= f.submit 'comment' %>
+
+<% if logged_in? %>
+  <%= form_for [@post, @comment] do |f| %>
+    <div class='control-group'>
+      <%= f.text_area :body, rows:5 %>  
+    </div>
+      <%= f.submit 'comment' %>
+  <% end %>
 <% end %>
 
-
-  <% @post.comments.each do |comment| %>
-
-<div class = 'well'>
+<% @post.comments.each do |comment| %>
+  <div class = 'well'>
     <ul> <%= comment.body %> </ul>
-</div>
-  <% end %>
-
-
+  </div>
+<% end %>
