@@ -17,7 +17,7 @@ helper_method :current_user, :logged_in?
 
   def require_user
     if !logged_in?
-      flash[:error]=" Must be logged in to do that"
+      flash[:error]= "Must be logged in to do that"
       redirect_to root_path
     end
   end

@@ -4,7 +4,7 @@
   def create
     @post= Post.find(params[:post_id])
     @comment = @post.comments.build(params.require(:comment).permit(:body))
-    @comment.creator= User.first
+    @comment.creator= User.find(session[:user_id])
     binding.pry
 
     if @comment.save

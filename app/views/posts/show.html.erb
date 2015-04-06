@@ -1,8 +1,11 @@
+<% if logged_in? %>
 <% if @post.creator.username == current_user %>
 <p class='pull-right'> [<%= link_to 'edit this post', edit_post_path(@post) %>]
 
 <p>
 <% end %>
+<% end %>
+
   <%= render @post.categories%>
 </p>
 
@@ -19,7 +22,7 @@
     </p>
 
     <p>
-      <%= render '/shared/creator', name: @post.creator.username, time: display_datetime(@post.created_at) %>
+      <%= render '/shared/creator', name: link_to(@post.creator.username, user_path(@post.creator.id)), time: display_datetime(@post.created_at) %>
     </p>
 
   </div>
@@ -37,7 +40,5 @@
 <% end %>
 
 <% @post.comments.each do |comment| %>
-  <div class = 'well'>
-    <ul> <%= comment.body %> </ul>
-  </div>
+<%= render 'comment', comment: comment, link:''%>
 <% end %>

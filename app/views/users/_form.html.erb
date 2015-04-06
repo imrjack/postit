@@ -11,7 +11,7 @@
 <%=f.password_field :password%>
 </div>
 
-<%= f.submit :class => "btn btn-small" %>
+<%= f.submit (f.object.new_record? ? "Register" : "Update"), class: 'btn btn-success' %>
 <% end %>
 
 </div>

@@ -1,0 +1,7 @@
+<div class = 'well'>
+    <ul> <%= comment.body %> </ul>
+<p>
+<%= render 'shared/creator', name:link_to(comment.creator.username, user_path), time: display_datetime(comment.created_at) %>
+</p>  
+
+</div>
