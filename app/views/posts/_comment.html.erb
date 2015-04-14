@@ -1,7 +1,13 @@
+<% show_post||= false %>
 <div class = 'well'>
-    <ul> <%= comment.body %> </ul>
-<p>
-<%= render 'shared/creator', name:link_to(comment.creator.username, user_path), time: display_datetime(comment.created_at) %>
-</p>  
+  <em>"<%= comment.body%>"</em>
+
+  <% if show_post == true %>
+    on <%= link_to(comment.post.title, post_path(comment.post))%>
+  <% end%>
+
+  <p>
+  <%= render 'shared/creator', name:link_to(comment.creator.username, user_path(comment.creator.id)), time: display_datetime(comment.created_at) %>
+  </p>  
 
 </div>

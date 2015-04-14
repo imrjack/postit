@@ -1,15 +1,12 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show,:edit, :update]
+  before_action :require_same_user, only: [:edit,:update]
+
   def new
     @user =  User.new
   end
 
   def show 
-    if logged_in?
-      @user= User.find(params[:id])
-    else
-      flash['alert']="Must be logged in to do that"
-      redirect_to login_path
-    end
   end
 
   def create
@@ -24,12 +21,9 @@ class UsersController < ApplicationController
   end
 
   def edit 
-    @user= User.find(session[:user_id])
-
   end
 
   def update
-    @user= User.find(session[:user_id])
     if @user.update(user_params)
       flash['success']="Profile successfully updated"
       redirect_to user_path(@user)
@@ -38,6 +32,17 @@ class UsersController < ApplicationController
     end
   end
 private
+
+  def set_user 
+    @user=User.find(session[:user_id])
+  end
+
+  def require_same_user
+    if current_user != @user 
+      flash['alert']= "You can't do that"
+      redirect_to root_path
+    end
+  end 
 
   def user_params
     params.require(:user).permit(:username, :password)
