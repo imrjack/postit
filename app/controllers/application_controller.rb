@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
 
-helper_method :current_user, :logged_in?, :voted_for
+helper_method :current_user, :logged_in?, :posts_voted_by_users
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id] #Will return nil if session[:user_id] does not exist instead of exception
