@@ -1,4 +1,4 @@
-<% if @post.creator.username == current_user.username %>
+<% if @post.creator == current_user %>
 <p class='pull-right'> [<%= link_to 'edit this post', edit_post_path(@post) %>]
 
 <p>
@@ -38,5 +38,6 @@
 <% end %>
 
 <% @post.comments.each do |comment| %>
+
 <%= render 'comment', comment: comment%>
 <% end %>

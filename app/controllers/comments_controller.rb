@@ -1,11 +1,10 @@
-  class CommentsController < ApplicationController
+class CommentsController < ApplicationController
   before_action :require_user
   
   def create
     @post= Post.find(params[:post_id])
     @comment = @post.comments.build(params.require(:comment).permit(:body))
     @comment.creator= User.find(session[:user_id])
-    binding.pry
 
     if @comment.save
       redirect_to post_path(@post)
@@ -15,11 +14,22 @@
   end
 
   def edit
-    
   end
 
   def update
-  binding.pry
+  end
+
+  def vote
+    
+    comment = Comment.find(params[:id])
+    vote = Vote.create(voteable:comment, creator:current_user,vote:params[:vote])
+    
+    if vote.valid?
+      flash["success"]= 'Your vote was counted'
+    else
+      flash['alert'] ='You can only vote on a comment once'
+    end
+    redirect_to :back
   end
 
 

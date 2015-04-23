@@ -1,16 +1,28 @@
-<div class='row'>
-  <div class='span8 well'>
+<div class = 'row'>
+<% voted ||= false %>
+<% if voted == true %>
+    <div class='span0 well text-center'>
+      <%=post.total_votes %> votes </br>
+      <div class='btn small-btn'>
+      <%=link_to 'unvote',unvote_post_path(post),method: 'delete' %>
+      </div>
+    </div>  
+ 
+    <% else %>
+  <%=  render 'posts/votes', voteable_type:'post',post:post, obj:post%>
+<% end %>
+  <div class= 'container'>
+    <div class='span8 well'>
+      <%= render post.categories%>
 
-  <%= render post.categories%>
-
-    <h4><%= link_to post.title, fix_url(post.url) %> </h4>
-    <p><%= post.description %></p>
-    <p><%= render 'shared/creator', name:link_to(post.creator.username, user_path(post.creator)), time: display_datetime(post.created_at) %></p>
-
-    <small>
-    <span>
-      <%= link_to("#{post.comments.size} comments", post_path(post)) %>
-    </span>
-    </small>
+      <h4><%= link_to post.title, fix_url(post.url) %> </h4>
+      <p><%= post.description %></p>
+      <p><%= render 'shared/creator', name:link_to(post.creator.username, user_path(post.creator)), time: display_datetime(post.created_at) %></p>
+      <small>
+        <span>
+          <%= link_to("#{post.comments.size} comments", post_path(post)) %>
+        </span>
+      </small>
+    </div>
   </div>
 </div>

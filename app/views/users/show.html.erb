@@ -20,13 +20,21 @@
 
     <% if params[:tab].nil? %>
       <% @user.posts.each do |post|%>
-        <%= render 'posts/post', post:post %>
-      <% end %>
+        
+        <% if logged_in? %>
+              <%= render 'posts/post', post:post %>
+
+          <%= render 'posts/post', post:post, voted: true %>
+            
+        <% end %>
+
+        <% end %>
     <% elsif params[:tab]=='comments' %>
       <% @user.comments.each do |comment| %>
         <%= render 'posts/comment', comment: comment, show_post: true %>
       <% end %>
     <% end %>
+
       </div>
     </div>
   </div>

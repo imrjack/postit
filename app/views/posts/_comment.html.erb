@@ -1,13 +1,16 @@
-<% show_post||= false %>
-<div class = 'well'>
-  <em>"<%= comment.body%>"</em>
+<div class= 'row'>
+  <%=  render 'posts/votes', voteable_type:'comment',comment:comment, obj:comment%>
+  <% show_post||= false %>
+  <div class='container'>
 
-  <% if show_post == true %>
-    on <%= link_to(comment.post.title, post_path(comment.post))%>
-  <% end%>
-
-  <p>
-  <%= render 'shared/creator', name:link_to(comment.creator.username, user_path(comment.creator.id)), time: display_datetime(comment.created_at) %>
-  </p>  
-
+    <div class='well span8'>
+      <em>"<%= comment.body%>"</em>
+        <% if show_post == true %>
+        on <%= link_to(comment.post.title, post_path(comment.post))%>
+        <% end%>
+        <p>
+        <%= render 'shared/creator', name:link_to(comment.creator.username, user_path(comment.creator.id)), time: display_datetime(comment.created_at) %>
+        </p>  
+    </div>
+  </div>
 </div>

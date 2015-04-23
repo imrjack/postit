@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show,:edit, :update]
+  before_action :set_user, only: [:edit, :update]
   before_action :require_same_user, only: [:edit,:update]
 
   def new
@@ -7,7 +7,10 @@ class UsersController < ApplicationController
   end
 
   def show 
+    @user=User.find(params[:id])
   end
+
+
 
   def create
     @user = User.new(user_params)    

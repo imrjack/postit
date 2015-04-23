@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
 
-helper_method :current_user, :logged_in?
+helper_method :current_user, :logged_in?, :voted_for
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id] #Will return nil if session[:user_id] does not exist instead of exception
@@ -23,4 +23,28 @@ helper_method :current_user, :logged_in?
   end
 
 
+  def posts_voted_by_users
+    if logged_in?
+    votes= []
+    posts = []
+    current_user.votes.each do |vote|
+      votes << vote.voteable_id
+    end
+    @posts.each do |post|
+      posts << post.id  
+    end
+
+    match = votes & posts
+    voted = []
+    @posts.each do |post|
+      if match.include?(post.id)
+        voted << post
+      end
+    end
+    return voted
+  end
+  end
+
 end
+
+

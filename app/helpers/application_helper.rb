@@ -16,4 +16,6 @@ module ApplicationHelper
     date_time.strftime("%I:%M on %B %d, %Y")
   end
 
+  
+
 end
