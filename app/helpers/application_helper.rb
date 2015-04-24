@@ -13,7 +13,7 @@ module ApplicationHelper
   end
 
   def display_datetime(date_time)
-    date_time.strftime("%I:%M on %B %d, %Y")
+    date_time.created_at.strftime("%I:%M on %B %d, %Y")
   end
 
   

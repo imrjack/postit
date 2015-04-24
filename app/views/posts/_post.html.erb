@@ -17,7 +17,7 @@
 
       <h4><%= link_to post.title, fix_url(post.url) %> </h4>
       <p><%= post.description %></p>
-      <p><%= render 'shared/creator', name:link_to(post.creator.username), time: display_datetime(post.created_at.try) %></p>
+      <p><%= render 'shared/creator', name:link_to(post.creator.username, user_path(post.creator)), time: display_datetime(post) %></p>
       <small>
         <span>
           <%= link_to("#{post.comments.size} comments", post_path(post)) %>
