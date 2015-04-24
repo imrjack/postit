@@ -5,14 +5,10 @@ class PostsController < ApplicationController
 
   def index
 
-    if logged_in?
-      @posts= Post.all
-      @voted= posts_voted_by_users
-  	  @posts = Post.where.not(id: posts_voted_by_users)
-    else
+
       @posts= Post.all
       flash["alert"]= params[:error]
-    end
+
 
   end
 
@@ -23,10 +19,11 @@ class PostsController < ApplicationController
 
   def vote
     @vote= Vote.create(voteable:@post, creator:current_user,vote:params[:vote])
+
     if @vote.valid? 
-      flash['success']= "Your vote was counted"
+      flash["success"]= "Your vote was counted"
     else
-      flash['alert']= 'You can only cast one vote'
+      flash["error"]= 'You can only cast one vote'
     end
       redirect_to :back
   end

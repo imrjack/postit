@@ -1,13 +1,5 @@
 <%= render 'shared/content_title', title: "Posts"%>
 <% @posts.each do |post| %>
-
   <%= render 'post', post:post %>
 
-<% end %>
-
-<% if logged_in? %>
-<%@voted.each do |post|%>
-
-<%=render 'post', post:post, voted: true %>
-<% end %>
 <% end %>

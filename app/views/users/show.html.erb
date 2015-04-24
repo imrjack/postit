@@ -22,10 +22,7 @@
       <% @user.posts.each do |post|%>
         
         <% if logged_in? %>
-              <%= render 'posts/post', post:post %>
-
-          <%= render 'posts/post', post:post, voted: true %>
-            
+              <%= render 'posts/post', post:post %>            
         <% end %>
 
         <% end %>
