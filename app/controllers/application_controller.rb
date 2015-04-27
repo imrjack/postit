@@ -22,29 +22,6 @@ helper_method :current_user, :logged_in?, :posts_voted_by_users
     end
   end
 
-
-  def posts_voted_by_users
-    if logged_in?
-    votes= []
-    posts = []
-    current_user.votes.each do |vote|
-      votes << vote.voteable_id
-    end
-    @posts.each do |post|
-      posts << post.id  
-    end
-
-    match = votes & posts
-    voted = []
-    @posts.each do |post|
-      if match.include?(post.id)
-        voted << post
-      end
-    end
-    return voted
-  end
-  end
-
 end
 
 

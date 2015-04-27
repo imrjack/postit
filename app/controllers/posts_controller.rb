@@ -24,7 +24,7 @@ class PostsController < ApplicationController
 
   def unvote
     post = Post.find(params[:id])
-    vote = post.votes.find_by_user_id(current_user)
+    vote = post.votes.find_by(creator:current_user)
     vote.delete
     redirect_to :back
   end
