@@ -1,15 +1,22 @@
-<div class= 'row'>
-  <%=  render 'posts/votes', voteable_type:'comment',comment:comment, obj:comment%>
-  <% show_post||= false %>
-  <div class='container'>
+<% show_post||= false %>
 
+<div class= 'row'>
+  <div class='span0 well text-center'>
+    <%=  render 'posts/votes', obj:comment,voteable_type:'comment'%>
+  </div>
+  <div class='container'>
     <div class='well span8'>
       <em>"<%= comment.body%>"</em>
         <% if show_post == true %>
-        on <%= link_to(comment.post.title, post_path(comment.post))%>
+          on <%= link_to(comment.post.title, post_path(comment.post))%>
         <% end%>
         <p>
-        <%= render 'shared/creator', name:link_to(comment.creator.username, user_path(comment.creator.id)), time: display_datetime(comment.created_at) %>
+          <%= render 'shared/creator', name:link_to(comment.creator.username, user_path(comment.creator.id)), time: display_datetime(comment) %>
+          <% if comment.creator == current_user %>
+            <br><small>
+              <%=link_to 'delete',post_comment_path(comment.post,comment),method: 'delete' %>
+            </small>
+          <% end %>
         </p>  
     </div>
   </div>

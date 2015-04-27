@@ -4,22 +4,16 @@ class PostsController < ApplicationController
   before_action :require_user, except:[:index,:show]
 
   def index
-
-
-      @posts= Post.all
-      flash["alert"]= params[:error]
-
-
+    @posts= Post.all
+    flash["alert"]= params[:error]
   end
 
   def show
     @comment = Comment.new
   end
   
-
   def vote
     @vote= Vote.create(voteable:@post, creator:current_user,vote:params[:vote])
-
     if @vote.valid? 
       flash["success"]= "Your vote was counted"
     else
@@ -28,6 +22,12 @@ class PostsController < ApplicationController
       redirect_to :back
   end
 
+  def unvote
+    post = Post.find(params[:id])
+    vote = post.votes.find_by_user_id(current_user)
+    vote.delete
+    redirect_to :back
+  end
 
 
   def new
@@ -37,7 +37,6 @@ class PostsController < ApplicationController
   def create
     @post= Post.new(post_params)
     @post.creator = current_user
-
     if @post.save
       flash["Success"]= "Saved"
       redirect_to posts_path
@@ -55,15 +54,6 @@ class PostsController < ApplicationController
       redirect_to post_path(@post)
     else
       render :edit
-    end
-  end
-
-  def unvote
-    post = Post.find(params[:id])
-    @vote = post.votes.find_by_user_id(current_user)
-
-    if @vote.delete
-      redirect_to :back
     end
   end
 

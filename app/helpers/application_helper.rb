@@ -12,8 +12,8 @@ module ApplicationHelper
     url.starts_with?("http://") ? url: "http://#{url}"
   end
 
-  def display_datetime(date_time)
-    date_time.created_at.strftime("%I:%M on %B %d, %Y")
+  def display_datetime(post_or_comment)
+    post_or_comment.created_at.strftime("%I:%M on %B %d, %Y")
   end
 
   

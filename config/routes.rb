@@ -13,10 +13,10 @@ PostitTemplate::Application.routes.draw do
       delete :unvote     
     end
  
-    resources :comments, only:[:create]  do 
+    resources :comments, only:[:create,:destroy]  do 
       member do 
         post :vote
-        
+        delete :unvote
       end
       
     end

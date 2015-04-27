@@ -1,39 +1,27 @@
 <% if @post.creator == current_user %>
-<p class='pull-right'> [<%= link_to 'edit this post', edit_post_path(@post) %>]
-
-<p>
+  <p class='pull-right'> 
+    [<%= link_to 'edit this post', edit_post_path(@post) %>]
+  <p>
 <% end %>
 
-  <%= render @post.categories%>
-</p>
+<%= render @post.categories%></p>
 
 <p>
   <%= render 'shared/content_title', title: @post.title%>
 </p>
 
 
-<div class ='row'>
-  <div class='span8 well'>
-
-    <p> 
-      <%= @post.description%> 
-    </p>
-
-    <p>
-      <%= render '/shared/creator', name: link_to(@post.creator.username, user_path(@post.creator.id)), time: display_datetime(@post.created_at) %>
-    </p>
-
-  </div>
-</div>
-
+  <%= render 'post', post: @post %>
+<hr width='85%'>
+<h4>Comments</h4>
 <%= render 'shared/errors', obj:@comment %>
 
 <% if logged_in? %>
   <%= form_for [@post, @comment] do |f| %>
     <div class='control-group'>
-      <%= f.text_area :body, rows:5 %>  
+      <%= f.text_area :body, rows:5, class:'span10'%>  
     </div>
-      <%= f.submit 'comment' %>
+      <%= f.submit 'submit'%>
   <% end %>
 <% end %>
 
@@ -41,3 +29,4 @@
 
 <%= render 'comment', comment: comment%>
 <% end %>
+
