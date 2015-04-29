@@ -10,7 +10,7 @@ class Post < ActiveRecord::Base
   validates :url, presence:true
   validates :description, presence:true
 
-  include VoteCount
+  include Voteable
 
 
 end

@@ -4,5 +4,5 @@ class Comment < ActiveRecord::Base
     has_many :votes, :as => :voteable
     validates :body, presence:true
 
-    include VoteCount
+    include Voteable
 end

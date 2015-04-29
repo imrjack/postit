@@ -1,4 +1,4 @@
-module VoteCount
+module Voteable
 
   def total_votes
     up_votes - down_votes

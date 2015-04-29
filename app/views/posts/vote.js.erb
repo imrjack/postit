@@ -1,0 +1,7 @@
+<% if @vote.valid? %>
+$('#post_<%=@post.id%>_votes').html('<%=@post.total_votes%>').click(function(){
+  $('.icon-arrow-up').css('color','red');
+});
+<% else %>
+alert('no')
+<% end %>
