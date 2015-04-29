@@ -1,13 +1,10 @@
-
-<% if @vote.valid?%>
-  $('#post_<%=@post.id%>_votes').html('<%=@post.total_votes%>')
-  <% if @vote[:vote]== true %>
-      $("#true_<%=@post.id%>_vote").css("opacity","0.5");
-  <% elsif @vote[:vote]== false %>
-      $("#false_<%=@post.id%>_vote").css("opacity", "0.5");
- <% end %>
+<% if @vote.valid? %>
+    $("#<%=params[:vote]%>_<%=@post.id%>_vote").css("opacity", "0.5")
 <% else %>
   <% vote= Vote.where(user_id:current_user, voteable_id:@vote.voteable_id,voteable_type:@vote.voteable_type) %>
   <% vote.delete(vote) %>
-  $('#post_<%=@post.id%>_votes').html('<%=@post.total_votes%>')
+  $("#<%=params[:vote]%>_<%=@post.id%>_vote").css("opacity", "1")
 <% end %>
+
+$('#post_<%=@post.id%>_votes').html('<%=@post.total_votes%>')
+

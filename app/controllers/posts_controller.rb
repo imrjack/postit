@@ -22,7 +22,6 @@ class PostsController < ApplicationController
           @vote.delete
         end
         redirect_to :back
-
       end
     format.js 
     end
