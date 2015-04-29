@@ -16,6 +16,8 @@ module ApplicationHelper
     post_or_comment.created_at.strftime("%I:%M on %B %d, %Y")
   end
 
-  
+  def render_link_to_posts_path
+      link_to posts_path, remote: true
+  end
 
 end

@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   before_action :require_user, except:[:index,:show]
 
   def index
-    @posts= Post.all
+    @posts= Post.all  
     flash["alert"]= params[:error]
   end
 
@@ -19,13 +19,12 @@ class PostsController < ApplicationController
         if @vote.valid? 
           flash['success']='Your vote was counted'
         else
-          flash["error"]= 'You can only cast one vote'
+          @vote.delete
         end
         redirect_to :back
 
       end
-
-      format.js 
+    format.js 
     end
   end
 
@@ -34,6 +33,10 @@ class PostsController < ApplicationController
     vote = post.votes.find_by(creator:current_user)
     vote.delete
     redirect_to :back
+  end
+
+  def change_vote
+
   end
 
 

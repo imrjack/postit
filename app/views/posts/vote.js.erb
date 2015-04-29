@@ -1,7 +1,13 @@
-<% if @vote.valid? %>
-$('#post_<%=@post.id%>_votes').html('<%=@post.total_votes%>').click(function(){
-  $('.icon-arrow-up').css('color','red');
-});
+
+<% if @vote.valid?%>
+  $('#post_<%=@post.id%>_votes').html('<%=@post.total_votes%>')
+  <% if @vote[:vote]== true %>
+      $("#true_<%=@post.id%>_vote").css("opacity","0.5");
+  <% elsif @vote[:vote]== false %>
+      $("#false_<%=@post.id%>_vote").css("opacity", "0.5");
+ <% end %>
 <% else %>
-alert('no')
+  <% vote= Vote.where(user_id:current_user, voteable_id:@vote.voteable_id,voteable_type:@vote.voteable_type) %>
+  <% vote.delete(vote) %>
+  $('#post_<%=@post.id%>_votes').html('<%=@post.total_votes%>')
 <% end %>

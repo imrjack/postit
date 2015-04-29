@@ -15,21 +15,17 @@
   <% end %>
 
 <% elsif voteable_type ==  'post' %>
-  <% if obj.votes.where(user_id:current_user).exists? %>
- <span id='post_<%=post.id%>_votes'><%=obj.total_votes %></span> votes <br>
-      <%= link_to "Unvote",unvote_post_path(obj), method: 'delete',remote: true %>
-  <% else %>
+
 
     <%=link_to vote_post_path(post,vote: true), method: 'post',remote: true  do %>
-    <i class="icon-arrow-up" ></i></br>
+    <span id="true_<%=post.id%>_vote"><i class="icon-arrow-up" ></i></span></br>
     <% end %>
        <span id='post_<%=post.id%>_votes'><%= obj.total_votes %></span>  Votes</br>
     <%=link_to vote_post_path(post,vote: false), method: 'post', remote: true do %>  
-      <i class='icon-arrow-down'></i>
+    <span id="false_<%=post.id%>_vote"><i class='icon-arrow-down'></i></span>
     <% end %>
   <% end %>
 
-<% end %>
 
 
 
